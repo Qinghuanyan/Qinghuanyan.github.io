@@ -1,3 +1,3 @@
-var posts=["2025/06/12/少年，孤身入局可惧否？/","2025/05/17/道友，故事的结局重要么？/","2025/08/06/也许那并不是遗憾，而是人生路上必经的离散/","2025/06/11/JavaNote/"];function toRandomPost(){
+var posts=["2025/06/12/少年，孤身入局可惧否？/","2025/05/17/道友，故事的结局重要么？/","2025/08/06/也许那并不是遗憾，而是人生路上必经的离散/","2025/06/11/JavaNote/","2025/08/22/中国·羊驼小镇/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
