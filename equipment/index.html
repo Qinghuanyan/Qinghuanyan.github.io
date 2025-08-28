@@ -338,6 +338,9 @@ queueMicrotask(() => {
       avatar: 'mp',
       serverURLs: 'https://ssq1fsjv.api.lncldglobal.com',
       emojiMaps: "",
+      master: 'af07a3723e1c01a084dcfe91bcc633c8',   //博主邮箱md5加密32位小写
+      tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+      friends:  [],  //小伙伴邮箱Md5
       path: window.location.pathname,
       visitor: true
     }, null))
@@ -346,7 +349,7 @@ queueMicrotask(() => {
   const loadValine = async () => {
     if (typeof Valine === 'function') initValine()
     else {
-      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
+      await getScript('/js/valine.min.js')
       initValine()
     }
   }
