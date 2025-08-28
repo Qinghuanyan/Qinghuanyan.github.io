@@ -703,7 +703,7 @@ queueMicrotask(() => {
   const loadValine = async () => {
     if (typeof Valine === 'function') initValine()
     else {
-      await getScript('/js/valine.min.js')
+      await getScript('https://cdn.cbd.int/valine@1.5.1/dist/Valine.min.js')
       initValine()
     }
   }
