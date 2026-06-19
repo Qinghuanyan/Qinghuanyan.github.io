@@ -348,7 +348,7 @@ queueMicrotask(() => {
       tagMeta: ["博主","小伙伴","访客"],     //标识字段名
       friends:  [],  //小伙伴邮箱Md5
       path: window.location.pathname,
-      visitor: false
+      visitor: true
     }, null))
   }
 
@@ -523,7 +523,67 @@ document.addEventListener('pjax:error', e => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script>(() => {
+})</script><script>(() => {
+  if (window.__anzhiyuPostViewCounter) return
+  window.__anzhiyuPostViewCounter = true
+
+  const serverURL = 'https://ssq1fsjv.api.lncldglobal.com'.replace(/\/$/, '')
+  const headers = {
+    'X-LC-Id': 'sSQ1FsjViw3UbvqxGKNnP32f-MdYXbMMI',
+    'X-LC-Key': 'g7Rzysk5U0goE3bmSnLCYCHv',
+    'Content-Type': 'application/json'
+  }
+
+  function currentPostPath () {
+    if (!document.querySelector('#post #article-container')) return ''
+    let path = window.location.pathname.replace(/index\.html$/, '')
+    if (path !== '/' && !path.endsWith('/')) path += '/'
+    return path
+  }
+
+  function currentPostTitle () {
+    const title = document.querySelector('#post-info .post-title')
+    return title ? title.textContent.trim() : document.title.replace(/\s*\|.*$/, '')
+  }
+
+  async function touchPostView () {
+    const path = currentPostPath()
+    if (!path || path === '/') return
+
+    const where = encodeURIComponent(JSON.stringify({ url: path }))
+    const queryURL = `${serverURL}/1.1/classes/Counter?where=${where}&limit=1`
+
+    try {
+      const query = await fetch(queryURL, { method: 'GET', headers })
+      if (!query.ok) throw new Error(`Counter query failed: ${query.status}`)
+      const data = await query.json()
+      const item = data.results && data.results[0]
+
+      if (item && item.objectId) {
+        const nextCount = (Number(item.time) || 0) + 1
+        await fetch(`${serverURL}/1.1/classes/Counter/${item.objectId}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({ time: { '__op': 'Increment', amount: 1 } })
+        })
+        return nextCount
+      }
+
+      await fetch(`${serverURL}/1.1/classes/Counter`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ url: path, title: currentPostTitle(), time: 1 })
+      })
+      return 1
+    } catch (error) {
+      return null
+    }
+  }
+
+  touchPostView()
+  document.addEventListener('pjax:complete', touchPostView)
+})()
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script>(() => {
   if (window.__anzhiyuBusuanziFallback) return
   window.__anzhiyuBusuanziFallback = true
 
