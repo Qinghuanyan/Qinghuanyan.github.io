@@ -9247,6 +9247,15 @@ h1.page-title + .tag-cloud-list {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
+  z-index: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  -o-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+  transform: translateY(8px);
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -9943,6 +9952,11 @@ h1.page-title + .tag-cloud-list {
   opacity: 1;
   -ms-filter: none;
   filter: none;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
 }
 #aside-content .card-info:hover .author-status {
   opacity: 0;
@@ -20398,11 +20412,12 @@ html.hide-aside .layout > div:first-child {
   background: #57bd6a;
   display: flex;
   justify-content: center;
+  align-items: center;
   align-content: center;
   padding: 0;
   cursor: pointer;
   border: none;
-  height: 110px;
+  height: 260px;
 }
 [data-theme="dark"] #aside-content .card-widget#card-wechat {
   background-color: #121121;
@@ -20416,8 +20431,9 @@ html.hide-aside .layout > div:first-child {
 
 #flip-wrapper {
   position: relative;
-  width: 235px;
-  height: 110px;
+  width: min(235px, calc(100% - 24px));
+  aspect-ratio: 1 / 1;
+  height: auto;
   z-index: 1;
 }
 #flip-content {
@@ -20433,7 +20449,7 @@ html.hide-aside .layout > div:first-child {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  background-size: 100%;
+  background-size: contain !important;
 }
 
 #aside-content #flip-wrapper #flip-content .back.face {
@@ -20441,7 +20457,7 @@ html.hide-aside .layout > div:first-child {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   box-sizing: border-box;
-  background-size: 100%;
+  background-size: contain !important;
 }
 #flip-wrapper:hover #flip-content {
   -webkit-transform: rotateY(180deg);
