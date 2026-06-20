@@ -279,6 +279,18 @@ if (true) {
     window.loadOtherComment = loadWaline
   }
 })()</script><input type="hidden" name="page-type" id="page-type" value="anzhiyu"></div><script>window.addEventListener('load', () => {
+  const hiddenCommentPaths = ["/2025/08/06/%E4%B9%9F%E8%AE%B8%E9%82%A3%E5%B9%B6%E4%B8%8D%E6%98%AF%E9%81%97%E6%86%BE%EF%BC%8C%E8%80%8C%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B7%AF%E4%B8%8A%E5%BF%85%E7%BB%8F%E7%9A%84%E7%A6%BB%E6%95%A3","/2025/09/27/%E6%97%85%E5%B1%85%E4%BA%BA%E9%97%B4%E4%BA%8C%E5%8D%81%E4%B8%80%E8%BD%BD","/about/index.html"]
+
+  const normalizeCommentPath = url => {
+    try {
+      return new URL(url || '/', window.location.origin).pathname.replace(/\/$/, '')
+    } catch (err) {
+      return String(url || '').split('#')[0].split('?')[0].replace(/\/$/, '')
+    }
+  }
+
+  const isHiddenComment = comment => hiddenCommentPaths.includes(normalizeCommentPath(comment.url || comment.path))
+
   const changeContent = content => {
     if (content === '') return content
 
@@ -294,6 +306,8 @@ if (true) {
   }
 
   const generateHtml = array => {
+    array = array.filter(item => !isHiddenComment(item)).slice(0, 6)
+
     let result = ''
 
     if (array.length) {
@@ -322,9 +336,9 @@ if (true) {
 
   const getComment = async () => {
     try {
-      const res = await fetch('https://qinghuanyanhexo.vercel.app/api/comment?type=recent&count=6', { method: 'GET' })
+      const res = await fetch('https://qinghuanyanhexo.vercel.app/api/comment?type=recent&count=30', { method: 'GET' })
       const result = await res.json()
-      const walineArray = result.data.map(e => {
+      const walineArray = result.data.filter(e => !isHiddenComment(e)).slice(0, 6).map(e => {
         return {
           'content': changeContent(e.comment),
           'avatar': e.avatar,
@@ -356,7 +370,7 @@ if (true) {
   newestCommentInit()
   document.addEventListener('pjax:complete', newestCommentInit)
 })</script><script>var visitorMail = "";
-</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
   selectors: pjaxSelectors,

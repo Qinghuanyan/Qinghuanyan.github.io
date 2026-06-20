@@ -15015,7 +15015,8 @@ blockquote {
   flex-direction: column;
   border: var(--style-border-always);
 }
-.share-link .share-main .share-main-all #qrcode {
+.share-link .share-main .share-main-all #qrcode,
+.share-link .share-main .share-main-all .ptool-wechat-qrcode {
   width: 150px;
   height: 150px;
   min-width: 150px;
@@ -15025,6 +15026,7 @@ blockquote {
   border-radius: 8px;
   margin-bottom: 8px;
   border: var(--style-border-always);
+  object-fit: cover;
 }
 .share-link .share-main .share-main-all .reward-dec {
   font-size: 12px;
