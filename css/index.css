@@ -22953,8 +22953,8 @@ canvas#universe {
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  filter: invert(1);
-  opacity: 0.26;
+  filter: invert(1) grayscale(1) contrast(2.2) brightness(0.55);
+  opacity: 0.52;
 }
 
 [data-theme="dark"] #universe {
