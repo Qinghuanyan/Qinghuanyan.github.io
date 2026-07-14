@@ -21299,6 +21299,11 @@ div#category {
   display: inline;
 }
 
+/* 文章正文段落首行缩进：中文长文阅读习惯，排除图片/媒体/提示块等非正文段落 */
+#article-container.post-content > p:not(:has(img, video, audio, iframe, .aplayer, .mmedia)) {
+  text-indent: 2em;
+}
+
 /* 宽屏适配 */
 .page .layout,
 .post .layout {
