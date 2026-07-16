@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Image pending</title>
+  <desc id="desc">A neutral placeholder for blog images that have not been restored.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#10172a"/>
+      <stop offset="0.55" stop-color="#1e2b4a"/>
+      <stop offset="1" stop-color="#2f405f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="28" fill="url(#bg)"/>
+  <path d="M120 520 365 295 525 435 650 330 1080 520v80H120z" fill="#f2b94b" opacity="0.9"/>
+  <circle cx="880" cy="170" r="56" fill="#ffffff" opacity="0.9"/>
+  <text x="600" y="610" fill="#ffffff" font-family="Arial, sans-serif" font-size="34" text-anchor="middle" opacity="0.9">Image pending</text>
+</svg>

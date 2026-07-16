@@ -8416,6 +8416,17 @@ body[data-type="music"] .s-sticker div {
 body:has(#console.show) #nav-music {
   display: none !important;
 }
+#nav-music {
+  display: none !important;
+}
+body:has(#console.show) #nav-music {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: box !important;
+  display: flex !important;
+}
 @media screen and (max-width: 1400px) {
   body #anMusic-page #anMusicSwitching,
   body #anMusic-page #anMusicRefreshBtn,
@@ -12792,7 +12803,14 @@ h1.page-title + .tag-cloud-list {
 }
 @media screen and (max-width: 1200px) {
   #random-banner {
-    display: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    height: auto;
+    min-height: 260px;
   }
 }
 #sidebar #sidebar-menus .menus_items .menus_item_child {
@@ -21038,6 +21056,206 @@ html.hide-aside .layout > div:first-child {
   }
 }
 
+/* About page: minimal profile, not a decorative card wall. */
+body[data-type="about"] #about-page {
+  --about-accent: var(--anzhiyu-main);
+  --about-card-bg: var(--anzhiyu-card-bg);
+  --about-card-border: var(--style-border-always);
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+}
+
+html[data-theme="dark"] body[data-type="about"] #about-page {
+  --about-accent: #38d5ff;
+  --about-card-bg: var(--anzhiyu-card-bg);
+  --about-card-border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-type="about"] #about-page .author-box {
+  margin: 0 0 14px;
+}
+
+body[data-type="about"] #about-page .author-tag-left,
+body[data-type="about"] #about-page .author-tag-right {
+  display: none;
+}
+
+body[data-type="about"] #about-page .author-img {
+  margin: 0;
+}
+
+body[data-type="about"] #about-page .author-img,
+body[data-type="about"] #about-page .author-img img {
+  width: 112px;
+  height: 112px;
+}
+
+body[data-type="about"] #about-page .author-img:hover {
+  transform: none;
+}
+
+body[data-type="about"] #about-page .p.center.logo.large {
+  margin-top: 0.5rem;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+body[data-type="about"] #about-page .p.center.small {
+  max-width: 34rem;
+  margin: 0.35rem auto 1.25rem;
+  color: var(--anzhiyu-secondtext);
+  line-height: 1.8;
+}
+
+body[data-type="about"] .author-content {
+  display: block;
+  margin-top: 0;
+}
+
+body[data-type="about"] .author-content-item {
+  width: 100% !important;
+  min-height: 0;
+  margin: 0 0 14px;
+  padding: 1.4rem 1.5rem;
+  border-radius: 16px;
+  background: var(--about-card-bg);
+  border: var(--about-card-border);
+  box-shadow: var(--anzhiyu-shadow-border);
+}
+
+body[data-type="about"] #about-page .myInfoAndSayHello {
+  color: var(--anzhiyu-fontcolor);
+  background: var(--about-card-bg);
+  animation: none;
+}
+
+body[data-type="about"] #about-page .myInfoAndSayHello .title1,
+body[data-type="about"] #about-page .myInfoAndSayHello .title2,
+body[data-type="about"] .aboutsiteTips h2 {
+  opacity: 1;
+  color: var(--anzhiyu-fontcolor);
+}
+
+body[data-type="about"] #about-page .myInfoAndSayHello .title2,
+body[data-type="about"] .aboutsiteTips h2 {
+  margin: 0.25rem 0 0.55rem;
+  font-size: clamp(1.75rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+body[data-type="about"] .author-content-item .author-content-item-tips {
+  margin-bottom: 0.45rem;
+  color: var(--anzhiyu-secondtext);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+body[data-type="about"] .aboutsiteTips .mask {
+  display: inline-block;
+  width: min(100%, 8.5em);
+  height: 1.18em;
+  margin: 0 0 0 0.35em;
+  color: var(--about-accent);
+  font-size: inherit;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  position: relative;
+  vertical-align: -0.08em;
+}
+
+body[data-type="about"] .aboutsiteTips .mask span {
+  display: block;
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  color: var(--about-accent);
+  background: none !important;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  opacity: 0;
+  transform: translateY(60%);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+body[data-type="about"] .aboutsiteTips h2 br {
+  display: none;
+}
+
+body[data-type="about"] .aboutsiteTips h2::after {
+  content: "技术和生活并行记录，公开内容保持克制。";
+  display: block;
+  max-width: 34rem;
+  margin-top: 0.75rem;
+  color: var(--anzhiyu-secondtext);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+body[data-type="about"] .aboutsiteTips .mask span[data-show] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body[data-type="about"] .aboutsiteTips .mask span[data-up] {
+  opacity: 0;
+  transform: translateY(-60%);
+}
+
+body[data-type="about"] .hello-about,
+body[data-type="about"] .author-content-item.skills,
+body[data-type="about"] .author-content-item.careers,
+body[data-type="about"] .author-content-item-group.column.mapAndInfo,
+body[data-type="about"] .author-content-item.personalities,
+body[data-type="about"] .author-content-item.myphoto,
+body[data-type="about"] .author-content-item.maxim,
+body[data-type="about"] .author-content-item.buff,
+body[data-type="about"] .author-content-item.game-yuanshen,
+body[data-type="about"] .author-content-item.comic-content,
+body[data-type="about"] .author-content-item.like-technology,
+body[data-type="about"] .author-content-item.like-music {
+  display: none !important;
+}
+
+body[data-type="about"] .create-site-post.author-content-item.single {
+  color: var(--anzhiyu-fontcolor);
+  background: transparent;
+  border: 0;
+  padding: 0.4rem 0 0;
+}
+
+body[data-type="about"] .create-site-post h2 {
+  margin: 0.8rem 0 0.6rem;
+  font-size: 1.25rem;
+}
+
+body[data-type="about"] .create-site-post p {
+  color: var(--anzhiyu-secondtext);
+  line-height: 1.9;
+  text-indent: 2em;
+}
+
+#aside-content .card-info,
+body[data-type="about"] #about-page {
+  word-break: normal;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+  hanging-punctuation: none;
+}
+
+#aside-content .card-info .author-info__description {
+  max-width: 16.5rem;
+  margin-inline: auto;
+  text-align: left;
+  line-break: strict;
+}
+
 #aside-content .card-widget#card-wechat {
   background:
     radial-gradient(circle at 72% 28%, rgba(129, 140, 248, 0.28), transparent 34%),
@@ -24533,14 +24751,11 @@ div#swiper_container:hover {
   font-size: clamp(2rem, 3.2vw, 3.2rem);
   line-height: 1.05;
   font-weight: 900;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.035em;
 }
 
 .tech-hero__title span + span {
-  color: transparent;
-  background: linear-gradient(90deg, #358bff, #18e7ae);
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: #358bff;
 }
 
 .tech-hero__desc {
@@ -24728,13 +24943,13 @@ div#swiper_container:hover {
 
 @media screen and (max-width: 1200px) {
   #tech-hero {
-    min-width: 520px;
+    min-width: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   #tech-hero {
-    min-width: 320px;
+    min-width: 0;
     padding: 1.6rem 1.4rem;
   }
 
