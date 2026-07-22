@@ -21256,6 +21256,43 @@ body[data-type="about"] #about-page {
   line-break: strict;
 }
 
+/* 评论区访客定位 */
+#post-comment .comment-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.85rem;
+  padding: 0.45rem 0.75rem;
+  max-width: 100%;
+  border-radius: 8px;
+  background: var(--anzhiyu-secondbg, rgba(0, 0, 0, 0.04));
+  color: var(--anzhiyu-secondtext, #666);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  opacity: 0.72;
+  transition: opacity 0.25s ease;
+}
+
+#post-comment .comment-location.is-ready {
+  opacity: 1;
+}
+
+#post-comment .comment-location[hidden] {
+  display: none !important;
+}
+
+#post-comment .comment-location i {
+  color: var(--anzhiyu-main, #425aef);
+  font-size: 0.9rem;
+}
+
+#post-comment .comment-location__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 #aside-content .card-widget#card-wechat {
   background:
     radial-gradient(circle at 72% 28%, rgba(129, 140, 248, 0.28), transparent 34%),
