@@ -21292,6 +21292,63 @@ body[data-type="about"] #about-page {
   white-space: nowrap;
 }
 
+/* 评论 meta：只保留时间 + 地点，隐藏浏览器/系统 */
+#post-comment .wl-browser,
+#post-comment .wl-os,
+#waline-wrap .wl-browser,
+#waline-wrap .wl-os {
+  display: none !important;
+}
+
+#post-comment .wl-addr,
+#waline-wrap .wl-addr {
+  display: inline-block;
+  margin-left: 0.45rem;
+  color: var(--anzhiyu-secondtext, #858585);
+  font-size: 0.78em;
+}
+
+#post-comment .wl-addr::before,
+#waline-wrap .wl-addr::before {
+  content: '·';
+  margin-right: 0.35rem;
+  opacity: 0.7;
+}
+
+/* 游客 / 用户标签（博主仍由 Waline admin 徽章显示） */
+#post-comment .anzhiyu-guest-badge,
+.wl-panel .anzhiyu-guest-badge,
+.wl-cards .anzhiyu-guest-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0 0.4em;
+  border: 1px solid rgba(144, 147, 153, 0.55);
+  border-radius: 3px;
+  color: #909399 !important;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 1.4;
+  vertical-align: middle;
+  background: transparent;
+}
+
+#post-comment .anzhiyu-user-badge,
+.wl-panel .anzhiyu-user-badge,
+.wl-cards .anzhiyu-user-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0 0.4em;
+  border: 1px solid rgba(66, 90, 239, 0.55);
+  border-radius: 3px;
+  color: var(--anzhiyu-main, #425aef) !important;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 1.4;
+  vertical-align: middle;
+  background: transparent;
+}
+
+
 
 #aside-content .card-widget#card-wechat {
   background:

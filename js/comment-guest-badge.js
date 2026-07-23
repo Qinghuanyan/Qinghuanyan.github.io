@@ -1,11 +1,22 @@
 (() => {
   const GUEST_TEXT = '游客'
-  const BADGE_CLASS = 'wl-badge anzhiyu-guest-badge'
+  const USER_TEXT = '用户'
+  const GUEST_CLASS = 'wl-badge anzhiyu-guest-badge'
+  const USER_CLASS = 'wl-badge anzhiyu-user-badge'
 
-  const hasRoleBadge = (card) =>
-    !!card.querySelector('.wl-badge:not(.anzhiyu-guest-badge)')
+  const hasAdminBadge = (card) => {
+    const badges = card.querySelectorAll('.wl-badge:not(.anzhiyu-guest-badge):not(.anzhiyu-user-badge)')
+    for (const b of badges) {
+      const t = (b.textContent || '').trim()
+      if (t === '博主' || /admin/i.test(b.className)) return true
+    }
+    return false
+  }
 
   const isLoggedInUser = (card) => {
+    if (card.querySelector('.wl-badge.level0, .wl-badge.level1, .wl-badge.level2, .wl-badge.level3')) {
+      return true
+    }
     if (card.querySelector('.wl-verified, .wl-user-avatar .wl-badge, .wl-avatar .verified')) {
       return true
     }
@@ -29,18 +40,39 @@
     )
   }
 
-  const addGuestBadge = (card) => {
-    if (!card || card.querySelector('.anzhiyu-guest-badge')) return
-    if (hasRoleBadge(card)) return
-    if (isLoggedInUser(card)) return
-
+  const upsertBadge = (card, text, className) => {
+    if (!card) return
     const nick = findInsertPoint(card)
     if (!nick) return
 
-    const badge = document.createElement('span')
-    badge.className = BADGE_CLASS
-    badge.textContent = GUEST_TEXT
-    nick.insertAdjacentElement('afterend', badge)
+    let badge = card.querySelector(`.${className.split(' ').pop()}`)
+    if (!badge) {
+      badge = document.createElement('span')
+      badge.className = className
+      nick.insertAdjacentElement('afterend', badge)
+    }
+    badge.textContent = text
+  }
+
+  const clearCustomBadges = (card) => {
+    card.querySelectorAll('.anzhiyu-guest-badge, .anzhiyu-user-badge').forEach((el) => el.remove())
+  }
+
+  const decorate = (card) => {
+    if (!card) return
+    if (hasAdminBadge(card)) {
+      clearCustomBadges(card)
+      return
+    }
+
+    if (isLoggedInUser(card)) {
+      card.querySelector('.anzhiyu-guest-badge')?.remove()
+      upsertBadge(card, USER_TEXT, USER_CLASS)
+      return
+    }
+
+    card.querySelector('.anzhiyu-user-badge')?.remove()
+    upsertBadge(card, GUEST_TEXT, GUEST_CLASS)
   }
 
   const scan = (root) => {
@@ -49,11 +81,19 @@
       '.wl-card, .wl-comment, .wl-list > li, li[id^="comment-"], .wl-item'
     )
     if (cards.length) {
-      cards.forEach(addGuestBadge)
+      cards.forEach(decorate)
       return
     }
     root.querySelectorAll('.wl-head').forEach((head) => {
-      addGuestBadge(head.closest('li, .wl-card, .wl-comment') || head.parentElement)
+      decorate(head.closest('li, .wl-card, .wl-comment') || head.parentElement)
+    })
+  }
+
+  const hideUaMeta = (root) => {
+    if (!root || !root.querySelectorAll) return
+    root.querySelectorAll('.wl-browser, .wl-os').forEach((el) => {
+      el.hidden = true
+      el.style.display = 'none'
     })
   }
 
@@ -65,10 +105,14 @@
     if (!wrap) return
 
     scan(wrap)
+    hideUaMeta(wrap)
 
     if (wrap.__guestBadgeObserved) return
     wrap.__guestBadgeObserved = true
-    const observer = new MutationObserver(() => scan(wrap))
+    const observer = new MutationObserver(() => {
+      scan(wrap)
+      hideUaMeta(wrap)
+    })
     observer.observe(wrap, { childList: true, subtree: true })
   }
 
